@@ -10,12 +10,13 @@ steps:
 
 # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ["build", "-t", "gcr.io/$PROJECT_ID/GC_CustomBuilder", "--build-arg=JAR_FILE=target/GC_CustomBuilder-1.0.0.jar", "."]
+#    args: ["build", "-t", "gcr.io/$PROJECT_ID/GC_CustomBuilder", "--build-arg=JAR_FILE=target/GC_CustomBuilder-1.0.0.jar", "."]
+    args: ["build", "-t", "gcr.io/$PROJECT_ID/GC_CustomBuilder:$COMMIT_SHA", "."]
     id: 'building'
 
 # Push the container image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'push', 'gcr.io/$PROJECT_ID/GC_CustomBuilder' ]
+    args: [ 'push', 'gcr.io/$PROJECT_ID/GC_CustomBuilder:$COMMIT_SHA' ]
 
 # Deploy container image to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -25,9 +26,9 @@ steps:
       - 'deploy'
       - 'GC_CustomBuilder'
       - '--image'
-      - 'gcr.io/$PROJECT_ID/GC_CustomBuilder'
+      - 'gcr.io/$PROJECT_ID/GC_CustomBuilder:$COMMIT_SHA'
       - '--region'
       - 'us-east4-a'
       - '--platform'
       - 'managed'
-images: ["gcr.io/$PROJECT_ID/GC_CustomBuilder"]
+images: ["gcr.io/$PROJECT_ID/GC_CustomBuilder:$COMMIT_SHA"]
