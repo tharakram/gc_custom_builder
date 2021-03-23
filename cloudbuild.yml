@@ -1,12 +1,12 @@
 steps:
-  - name: 'maven:3.6.3-jdk-11'
-    entrypoint: mvn
-    args: ["test"]
-    id: 'install-dependencies'
-  - name: 'maven:3.6.3-jdk-11'
-    entrypoint: mvn
-    args: ["package", "-Dmaven.test.skip=true"]
-    id: 'packaging'
+#  - name: 'maven:3.6.3-jdk-11'
+#    entrypoint: mvn
+#    args: ["test"]
+#    id: 'install-dependencies'
+#  - name: 'maven:3.6.3-jdk-11'
+#    entrypoint: mvn
+#    args: ["package", "-Dmaven.test.skip=true"]
+#    id: 'packaging'
 
 # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
