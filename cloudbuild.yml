@@ -18,7 +18,7 @@ steps:
     args: [ 'push', 'gcr.io/$PROJECT_ID/GC_CustomBuilder' ]
 
 # Deploy container image to Cloud Run
-  -name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
       - 'run'
